@@ -1,0 +1,31 @@
+@if(show){
+<div>
+    <p>products-list IF works!</p>
+</div>
+}
+@else {
+<div>
+    <p>products-list ELSE works!</p>
+</div>
+}
+
+@for(items of products; track items.id){
+<ul>
+    <li>{{items.name}}</li>
+</ul>
+} @empty{
+<div>Empty</div>
+}
+
+
+@switch(category){
+@case('Electronics'){
+<p>Electronics</p>
+}
+@case('Food'){
+<p>Food</p>
+}
+@default {
+<p>Default</p>
+}
+}
