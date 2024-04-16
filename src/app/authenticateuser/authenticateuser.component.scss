@@ -1,0 +1,35 @@
+.auth-container{
+    display: flex;
+    justify-content: center;
+    height: 90vh;
+    align-items: center;
+
+    .email-input{
+        width: 100%;
+    }
+
+    .glass-design{
+        width: 350px;
+        border-radius: 18px;
+        border: 1px solid #faa5a5;
+        .auth-title{
+            margin: 18px;
+            background: -webkit-linear-gradient(#ff7926, #150dfc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .login-container{
+            display: flex;
+            align-items: center;
+             margin: 0 0 8px 0; 
+            flex-direction: column;
+            .login-button{
+                width: 150px;
+            }
+        }
+
+    }
+}
+

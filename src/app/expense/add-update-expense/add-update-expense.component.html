@@ -1,0 +1,52 @@
+<div class="form-container">
+    <mat-card>
+        <mat-card-title class="expense-title">Enter Your Expense Details</mat-card-title>
+        <form [formGroup]="expenseForm">
+            <mat-form-field class="example-full-width">
+                <mat-label>Expense Title</mat-label>
+                <input matInput type="text" name="title" placeholder="Expense Title" formControlName="title">
+            </mat-form-field>
+            <br />
+            <mat-form-field class="example-full-width">
+                <mat-label>Expense Amount</mat-label>
+                <input matInput type="number" name="amount" placeholder="Expense Amount" formControlName="amount">
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <mat-label>Spent Date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="date">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <mat-label>Expense category</mat-label>
+                <mat-select formControlName="category" name="ctg">
+                    @for (ctg of category; track ctg) {
+                    <mat-option [value]="ctg.value">{{ctg.viewValue}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <mat-label>Expense Description</mat-label>
+                <textarea matInput name="description" placeholder="Expense Description"
+                    formControlName="description"></textarea>
+            </mat-form-field>
+            <br />
+            <div>
+                @if(editStatus){
+                <button mat-flat-button color="primary" (click)="updateExpense()">Update Expense</button>
+                }
+                @else {
+                <button type="submit" mat-flat-button color="primary" (click)="onSubmit()">Add Expense</button>
+                }
+            </div>
+
+            @if(expense$ | async){
+            <span>{{expenseStatus}}</span>
+            }
+
+        </form>
+    </mat-card>
+</div>

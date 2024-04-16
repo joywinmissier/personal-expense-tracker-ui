@@ -1,0 +1,29 @@
+mat-form-field{
+    width: 100%;
+}
+.form-container{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top: 18px;
+    .expense-title{
+        margin: 8px;
+        background: -webkit-linear-gradient(#ff7926, #150dfc);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    mat-card{
+        width: 450px;
+        padding: 18px;
+        display: flex;
+        align-items: center;
+    }
+    form {
+        width: 350px;
+        div{
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

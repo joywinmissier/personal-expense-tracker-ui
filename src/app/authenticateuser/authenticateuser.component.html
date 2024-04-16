@@ -1,0 +1,19 @@
+<div class="auth-container">
+    <mat-card class="glass-design">
+        <div>
+            <mat-card-title class="auth-title">Login to Expense Tracker</mat-card-title>
+        </div>
+        <mat-card-content>
+            <mat-form-field appearance="outline" class="email-input">
+                <mat-label>Enter Your Email</mat-label>
+                <input type="email" matInput placeholder="Email Address" [(ngModel)]="emailId">
+            </mat-form-field>
+        </mat-card-content>
+        <div class="login-container">
+            <button mat-flat-button color="primary" class="login-button" (click)="loginUser()">Login</button>
+            <span *ngIf="userLogin$ | async">{{loginMessage}}</span>
+        </div>
+
+    </mat-card>
+
+</div>

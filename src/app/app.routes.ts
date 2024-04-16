@@ -1,19 +1,19 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { ProductsListComponent } from './products-list/products-list.component';
+import { AuthenticateuserComponent } from './authenticateuser/authenticateuser.component';
+import { ExpenseWrapperComponent } from './expense/expense-wrapper/expense-wrapper.component';
 
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'authenticate',
         pathMatch: 'full'
     },
     {
-        path:'home',
-        component : HomeComponent
+        path:'authenticate',
+        component : AuthenticateuserComponent
     },
     {
-        path:'products',
-        component : ProductsListComponent
+        path:'expense',
+        component : ExpenseWrapperComponent
     }
 ];
