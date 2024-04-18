@@ -10,4 +10,7 @@ export interface UserDetails {
     country: string,
     email: string,
     gender: string,
+    createdby: string
 }
+
+export type User = Omit<UserDetails, "_id">;

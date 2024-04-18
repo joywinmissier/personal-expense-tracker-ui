@@ -1,3 +1,11 @@
 <mat-toolbar class="toolbar-design">
-    <span>Expense Tracker</span>
+    <div>
+        <span>Expense Tracker</span>
+        @if(isLoggedIn){
+        <span>Welcome {{userName}}</span>
+        <button mat-button (click)="logout()">Logout</button>
+        }
+
+    </div>
+
 </mat-toolbar>

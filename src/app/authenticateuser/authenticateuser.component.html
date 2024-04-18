@@ -1,4 +1,6 @@
 <div class="auth-container">
+    @if(userLogin$ | async; as userLogin){
+    @if(userLogin === 'EMPTY'){
     <mat-card class="glass-design">
         <div>
             <mat-card-title class="auth-title">Login to Expense Tracker</mat-card-title>
@@ -11,9 +13,59 @@
         </mat-card-content>
         <div class="login-container">
             <button mat-flat-button color="primary" class="login-button" (click)="loginUser()">Login</button>
-            <span *ngIf="userLogin$ | async">{{loginMessage}}</span>
+            <button mat-flat-button color="primary" class="login-button" (click)="redirectLoginRegister(true)">Register User</button>
         </div>
 
     </mat-card>
+    }
+    @else {
+    <mat-card class="glass-design register-box">
+        <div>
+            <mat-card-title class="auth-title">Register to Expense Tracker</mat-card-title>
+        </div>
+        <mat-card-content>
+            <form [formGroup]="signUpForm">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Name</mat-label>
+                    <input matInput type="text" name="title" placeholder="Enter your Name" formControlName="name">
+                </mat-form-field>
+                <br />
+                <mat-form-field class="example-full-width">
+                    <mat-label>Age</mat-label>
+                    <input matInput type="text" name="age" placeholder="Enter your Age" formControlName="age">
+                </mat-form-field>
+                <br />
+                <mat-form-field class="example-full-width">
+                    <mat-label>Country</mat-label>
+                    <input matInput type="text" name="country" placeholder="Enter your Country"
+                        formControlName="country">
+                </mat-form-field>
+                <br />
+                <mat-form-field class="email-input">
+                    <mat-label>Enter Your Email</mat-label>
+                    <input type="email" matInput placeholder="Email Address" formControlName="email">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Gender</mat-label>
+                    <mat-select formControlName="gender" name="ctg">
+                        @for (ctg of gender; track ctg) {
+                        <mat-option [value]="ctg.value">{{ctg.viewValue}}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+                <br />
+            </form>
+        </mat-card-content>
+        <div class="register-container">
+            <button mat-flat-button color="primary" class="login-button" (click)="registerUser()">Register</button>
+            <button mat-flat-button color="primary" class="login-button" (click)="redirectLoginRegister(false)">Back to Login</button>
+        </div>
 
+        @if(signUpUser$ | async){
+            <span>Registered Successfully</span>
+        }
+
+    </mat-card>
+    }
+    }
 </div>

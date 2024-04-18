@@ -14,7 +14,7 @@
             <br />
             <mat-form-field>
                 <mat-label>Spent Date</mat-label>
-                <input matInput [matDatepicker]="picker" formControlName="date">
+                <input matInput [matDatepicker]="picker" (click)="picker.open()" (focus)="picker.open()" formControlName="date">
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
@@ -29,6 +29,15 @@
             </mat-form-field>
             <br />
             <mat-form-field>
+                <mat-label>Payment Mode</mat-label>
+                <mat-select formControlName="paymentMode" name="ctg">
+                    @for (ctg of payMode; track ctg) {
+                    <mat-option [value]="ctg.value">{{ctg.viewValue}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
                 <mat-label>Expense Description</mat-label>
                 <textarea matInput name="description" placeholder="Expense Description"
                     formControlName="description"></textarea>
@@ -37,6 +46,7 @@
             <div>
                 @if(editStatus){
                 <button mat-flat-button color="primary" (click)="updateExpense()">Update Expense</button>
+                <button mat-flat-button color="primary" (click)="resetForm()">Cancel</button>
                 }
                 @else {
                 <button type="submit" mat-flat-button color="primary" (click)="onSubmit()">Add Expense</button>
@@ -44,7 +54,10 @@
             </div>
 
             @if(expense$ | async){
-            <span>{{expenseStatus}}</span>
+                <div class="expense-status">
+                    <span>{{expenseStatus}}</span>
+                </div>
+
             }
 
         </form>

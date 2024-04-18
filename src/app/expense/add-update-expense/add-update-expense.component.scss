@@ -18,12 +18,18 @@ mat-form-field{
         padding: 18px;
         display: flex;
         align-items: center;
+        border: 1px solid #faa5a5;
     }
     form {
         width: 350px;
         div{
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
         }
+    }
+
+    .expense-status{
+        display: flex;
+        justify-content: center;
     }
 }

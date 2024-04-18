@@ -26,7 +26,8 @@ export class AddUpdateExpenseComponent {
     amount: [''],
     date: [''],
     category: [''],
-    description: ['']
+    description: [''],
+    paymentMode: ['']
   });
  
   category = [
@@ -36,6 +37,13 @@ export class AddUpdateExpenseComponent {
     {value: 'Entertainment', viewValue: 'Entertainment'},
     {value: 'Others', viewValue: 'Others'},
   ];
+  
+  payMode = [{ value: 'Cash', viewValue: 'Cash' },
+  { value: 'Debit Card', viewValue: 'Debit Card' },
+  { value: 'Credit Card', viewValue: 'Credit Card' },
+  { value: 'Net Banking', viewValue: 'Net Banking' },
+  { value: 'UPI', viewValue: 'UPI' },
+  { value: 'Others', viewValue: 'Others' }]
 
   expense$ : Observable<Expense | string> = EMPTY;
   expenseStatus : string = '';
@@ -45,12 +53,14 @@ export class AddUpdateExpenseComponent {
     effect(() => {
       this.editStatus = this._storeService.editMode();
       if(this._storeService.editMode()){
+        this.expenseStatus = '';
         const expense = {
           title: this._storeService.expenseData().title,
           amount: this._storeService.expenseData().amount,
           date: this._storeService.expenseData().date,
           category: this._storeService.expenseData().category,
-          description: this._storeService.expenseData().description
+          description: this._storeService.expenseData().description,
+          paymentMode : this._storeService.expenseData().paymentMode ?? ''
         }
         this.expenseForm.setValue(expense)
       }
@@ -58,10 +68,23 @@ export class AddUpdateExpenseComponent {
    
    
    }
+
+   resetForm(){
+    this._storeService.setEditMode(false);
+    this.expenseForm.reset();
+   }
+
   onSubmit() {
-   this.expense$ = this.expenseService.addExpense(this.expenseForm.value).pipe(
+    const expenseDetails = {
+      ...this.expenseForm.value,
+      createdBy : this._storeService.userDetails()._id ?? localStorage.getItem('userid')
+    }
+   this.expense$ = this.expenseService.addExpense(expenseDetails).pipe(
       map((expense) => {
         this.expenseStatus = `Expense added successfully`;
+       
+        this._storeService.setExpenseData({} as Expense);
+        this.resetForm();
         return expense;
       }),
       catchError((error: Error) => {
@@ -76,6 +99,8 @@ export class AddUpdateExpenseComponent {
       map((expense) => {
         this.expenseStatus = `Expense updated successfully`;
         this._storeService.setEditMode(false);
+        this._storeService.setExpenseData({} as Expense);
+        this.expenseForm.reset();
         return expense;
       }),
       catchError((error: Error) => {

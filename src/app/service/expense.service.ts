@@ -8,9 +8,7 @@ import { StoreService } from './store.service';
 })
 export class ExpenseService {
   baseUrl = 'http://localhost:3000/api/v1/tracker';
-  // httpHeaders: HttpHeaders = new HttpHeaders({
-  //   Authorization: this._storeService.userToken()
-  // });
+
   constructor(private http: HttpClient, private _storeService : StoreService) { }
 
   getExpense(id: string): Observable<Expense> {
@@ -25,7 +23,16 @@ export class ExpenseService {
     return this.http.get<Expense[]>(`${this.baseUrl}/expense`);
   }
 
+  getAllExpenseForUser(userId : string) : Observable<Expense[]>{
+    return this.http.get<Expense[]>(`${this.baseUrl}/expense/user/${userId}`);
+  }
+
   updateExpense(expense : Expense, id : string): Observable<Expense>{
     return this.http.put<Expense>(`${this.baseUrl}/expense/${id}`, expense);
+  }
+
+  deleteExpense(id : string): Observable<string>{
+    return this.http.delete(`${this.baseUrl}/expense/${id}`,{responseType: 'text'});
+
   }
 }

@@ -4,6 +4,10 @@
     height: 90vh;
     align-items: center;
 
+    mat-form-field{
+        width: 100%;
+    }
+
     .email-input{
         width: 100%;
     }
@@ -23,13 +27,23 @@
         .login-container{
             display: flex;
             align-items: center;
-             margin: 0 0 8px 0; 
-            flex-direction: column;
+            margin: 0 12px 8px 12px;
+            justify-content: space-between;
             .login-button{
                 width: 150px;
             }
         }
 
+    }
+
+    .register-box{
+        width: 450px !important;
+    }
+
+    .register-container{
+        display: flex;
+        justify-content: space-between;
+        margin: 12px;
     }
 }
 
